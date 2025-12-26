@@ -1,0 +1,73 @@
+:root{--accent:#00f5ff}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:black;
+overflow:hidden
+}
+
+.bg-video{
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+object-fit:cover;
+filter:brightness(.35) blur(1px);
+z-index:-2
+}
+
+body::after{
+content:"";position:fixed;inset:0;
+background:rgba(0,0,0,.6);z-index:-1
+}
+
+.scene{perspective:2200px}
+
+.card{
+width:400px;height:250px;
+position:relative;transform-style:preserve-3d;
+transition:.4s ease-out
+}
+
+.card-front,
+.card-back{
+position:absolute;width:100%;height:100%;
+border-radius:26px;backface-visibility:hidden;
+overflow:hidden;
+box-shadow:0 50px 100px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.1)
+}
+
+.card-front{
+background:linear-gradient(135deg,#0c0c0c,#1f1f1f,#0c0c0c);color:white
+}
+
+.card-back{
+background:linear-gradient(135deg,#101010,#262626);transform:rotateY(180deg)
+}
+
+
+.grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
+.holo{position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,rgba(46, 46, 46, 0.15),transparent,rgba(0, 0, 0, 0.15),transparent);mix-blend-mode:color-dodge;animation:holo 10s linear infinite}
+@keyframes holo{to{transform:rotate(360deg)}}
+
+
+.chip{width:66px;height:52px;border-radius:14px;position:absolute;top:34px;left:34px;background:linear-gradient(135deg,#d4af37,#fbe9a7,#b9972f);box-shadow:inset 0 0 0 1px rgba(0,0,0,.4),0 6px 14px rgba(0,0,0,.6)}
+.bank{position:absolute;top:36px;right:34px;font-size:18px;font-weight:800;letter-spacing:5px}
+.name{position:absolute;bottom:38px;left:34px;font-size:14px;letter-spacing:6px;opacity:.85}
+.logo{position:absolute;bottom:30px;right:32px;font-size:30px;font-weight:800}
+
+
+.stripe{margin-top:36px;height:54px;background:linear-gradient(90deg,#000,#111,#000)}
+.signature-area{width:75%;height:42px;background:linear-gradient(135deg,#f2f2f2,#d9d9d9);margin:26px auto 0;border-radius:8px;position:relative}
+.signature-text{position:absolute;top:4px;left:8px;font-size:7px;letter-spacing:1px;color:#555}
+.signature{position:absolute;bottom:6px;right:10px;width:90px;opacity:.6}
+.micro-emboss{position:absolute;bottom:54px;left:30px;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.35);text-transform:uppercase;text-shadow:1px 1px 1px rgba(0,0,0,.6),-1px -1px 1px rgba(255,255,255,.08)}
+.back-info{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);text-align:center;font-size:9px;letter-spacing:2px;opacity:.55;color:white;line-height:1.6;white-space:nowrap}
+.back-info .line{pointer-events:none}
+.microtext{position:absolute;top:92px;left:50%;transform:translateX(-50%);font-size:6px;letter-spacing:1.5px;opacity:.25;color:white;white-space:nowrap;mask-image:linear-gradient(90deg,transparent,black,transparent)}
+
+
+#export{position:fixed;bottom:20px;right:20px;padding:12px 18px;border:none;border-radius:20px;cursor:pointer;z-index:10}

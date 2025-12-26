@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>BankCard</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<video class="bg-video" autoplay muted loop playsinline>
+<source src="https://cdn.coverr.co/videos/coverr-dark-waves-9716/1080p.mp4" type="video/mp4">
+</video>
+
+<div class="scene">
+    <div class="card" id="card">
+
+        <div class="card-front">
+            <div class="grain"></div>
+            <div class="holo"></div>
+            <div class="chip"></div>
+            <div class="bank">BANK</div>
+            <div class="name">PREMIUM</div>
+            <div class="logo">VISA</div>
+        </div>
+
+     
+        <div class="card-back">
+            <div class="stripe"></div>
+
+            <div class="signature-area">
+                <span class="signature-text">Authorized Signature</span>
+                <svg class="signature" viewBox="0 0 200 40">
+                    <path d="M10 30 Q40 5 70 25 T130 20 T190 30"
+                          fill="none"
+                          stroke="#333"
+                          stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div class="micro-emboss">
+                CARD
+            </div>
+
+            <div class="back-info">
+                <div class="line">www.CARD.com</div>
+            </div>
+
+            <div class="microtext">
+                THIS CARD IS PROPERTY OF CARD AND MUST BE RETURNED UPON REQUEST
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<button id="export">PNG AL</button>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+const scene=document.querySelector(".scene")
+const card=document.getElementById("card")
+
+
+scene.addEventListener("mousemove",e=>{
+const r=scene.getBoundingClientRect()
+const x=(e.clientX-r.left-r.width/2)/20
+const y=(e.clientY-r.top-r.height/2)/-20
+card.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`
+})
+scene.addEventListener("mouseleave",()=>{card.style.transform="rotateY(0) rotateX(0)"})
+
+
+if(window.DeviceOrientationEvent){
+window.addEventListener("deviceorientation",e=>{
+const x=Math.min(Math.max(e.gamma,-25),25)
+const y=Math.min(Math.max(e.beta-45,-25),25)
+card.style.transform=`rotateY(${x}deg) rotateX(${-y}deg)`
+})
+}
+
+
+document.getElementById("export").onclick=()=>{
+html2canvas(scene,{backgroundColor:null}).then(c=>{
+const a=document.createElement("a")
+a.href=c.toDataURL("image/png")
+a.download="CARD-card.png"
+a.click()
+})
+}
+</script>
+
+</body>
+</html>
